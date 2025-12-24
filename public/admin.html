@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Glace Intérieure</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0f18;
+      --bg-secondary: #0f1624;
+      --bg-card: rgba(15, 22, 36, 0.8);
+      --border: rgba(120, 180, 255, 0.15);
+      --border-hover: rgba(120, 180, 255, 0.3);
+      --text-primary: #ffffff;
+      --text-secondary: #b0d0f0;
+      --text-muted: #7aa0c8;
+      --accent: #4da6ff;
+      --accent-hover: #66b6ff;
+      --success: #4ade80;
+      --danger: #ff6b6b;
+      --warning: #fbbf24;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Login Screen */
+    .login-screen {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: 
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(77, 166, 255, 0.1), transparent 50%),
+        radial-gradient(ellipse 80% 50% at 80% 90%, rgba(77, 166, 255, 0.08), transparent 50%),
+        var(--bg-primary);
+      padding: 24px;
+    }
+
+    .login-card {
+      background: 
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(120, 180, 255, 0.1), transparent 50%),
+        linear-gradient(135deg, rgba(20, 40, 70, 0.9) 0%, rgba(15, 30, 55, 0.85) 100%);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(120, 180, 255, 0.2);
+      border-radius: 24px;
+      padding: 48px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+    }
+
+    .login-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .login-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(10, 20, 40, 0.6);
+      border: 1px solid rgba(120, 180, 255, 0.15);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(10, 20, 40, 0.8);
+      box-shadow: 0 0 0 4px rgba(77, 166, 255, 0.15);
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(77, 166, 255, 0.3);
+    }
+
+    .error-msg {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      color: #ffb3b3;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .error-msg.show { display: block; }
+
+    /* Dashboard */
+    .dashboard {
+      height: 100vh;
+      display: none;
+      grid-template-rows: 70px 1fr;
+    }
+
+    .dashboard.show { display: grid; }
+
+    /* Topbar */
+    .topbar {
+      background: 
+        linear-gradient(180deg, rgba(10, 15, 24, 0.98) 0%, rgba(10, 15, 24, 0.95) 100%);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(120, 180, 255, 0.15);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, rgba(77, 166, 255, 0.2), rgba(77, 166, 255, 0.1));
+      border: 1px solid rgba(77, 166, 255, 0.3);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-icon .material-icons {
+      color: var(--accent);
+      font-size: 22px;
+    }
+
+    .brand-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      background: rgba(20, 40, 70, 0.4);
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid rgba(120, 180, 255, 0.1);
+    }
+
+    .nav-tab {
+      padding: 10px 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-tab:hover {
+      color: var(--text-primary);
+      background: rgba(120, 180, 255, 0.1);
+    }
+
+    .nav-tab.active {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(77, 166, 255, 0.3);
+    }
+
+    .logout-btn {
+      padding: 10px 20px;
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.2);
+      border-radius: 10px;
+      color: #ffb3b3;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255, 107, 107, 0.15);
+      border-color: rgba(255, 107, 107, 0.3);
+    }
+
+    /* Workspace */
+    .workspace {
+      padding: 24px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 24px;
+      height: calc(100vh - 70px);
+    }
+
+    .workspace::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .workspace::-webkit-scrollbar-track {
+      background: rgba(10, 20, 40, 0.3);
+    }
+
+    .workspace::-webkit-scrollbar-thumb {
+      background: rgba(120, 180, 255, 0.3);
+      border-radius: 4px;
+    }
+
+    .workspace::-webkit-scrollbar-thumb:hover {
+      background: rgba(120, 180, 255, 0.5);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: 
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(120, 180, 255, 0.08), transparent 50%),
+        linear-gradient(135deg, rgba(20, 40, 70, 0.7) 0%, rgba(15, 30, 55, 0.6) 100%);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(120, 180, 255, 0.2);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      max-height: 100%;
+      overflow: hidden;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .add-module-btn {
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .add-module-btn:hover {
+      background: var(--accent-hover);
+      transform: scale(1.05);
+    }
+
+    .modules-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 8px;
+      min-height: 0;
+    }
+
+    .modules-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .modules-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .modules-list::-webkit-scrollbar-thumb {
+      background: rgba(120, 180, 255, 0.3);
+      border-radius: 3px;
+    }
+
+    .module-item {
+      background: rgba(10, 20, 40, 0.5);
+      border: 1px solid rgba(120, 180, 255, 0.15);
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .module-item:hover {
+      border-color: rgba(120, 180, 255, 0.3);
+      background: rgba(10, 20, 40, 0.7);
+      transform: translateX(4px);
+    }
+
+    .module-item.active {
+      border-color: var(--accent);
+      background: rgba(77, 166, 255, 0.15);
+      box-shadow: 0 0 0 2px rgba(77, 166, 255, 0.2);
+    }
+
+    .module-item-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .module-item-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .module-item-actions {
+      display: flex;
+      gap: 4px;
+    }
+
+    .icon-btn {
+      width: 28px;
+      height: 28px;
+      background: transparent;
+      border: 1px solid rgba(120, 180, 255, 0.2);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .icon-btn:hover {
+      background: rgba(120, 180, 255, 0.1);
+      border-color: rgba(120, 180, 255, 0.3);
+      color: var(--text-primary);
+    }
+
+    .icon-btn.delete:hover {
+      background: rgba(255, 107, 107, 0.1);
+      border-color: rgba(255, 107, 107, 0.3);
+      color: #ffb3b3;
+    }
+
+    .module-item-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .module-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: rgba(77, 166, 255, 0.15);
+      border: 1px solid rgba(77, 166, 255, 0.25);
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .status-badge {
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .status-badge.active {
+      background: rgba(74, 222, 128, 0.15);
+      color: var(--success);
+    }
+
+    .status-badge.inactive {
+      background: rgba(255, 107, 107, 0.15);
+      color: var(--danger);
+    }
+
+    /* Main Content */
+    .main-content {
+      background: 
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(120, 180, 255, 0.08), transparent 50%),
+        linear-gradient(135deg, rgba(20, 40, 70, 0.7) 0%, rgba(15, 30, 55, 0.6) 100%);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(120, 180, 255, 0.2);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      max-height: 100%;
+      overflow-y: auto;
+    }
+
+    .main-content::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .main-content::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .main-content::-webkit-scrollbar-thumb {
+      background: rgba(120, 180, 255, 0.3);
+      border-radius: 3px;
+    }
+
+    .content-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .content-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .add-video-btn {
+      padding: 12px 24px;
+      background: var(--accent);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .add-video-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(77, 166, 255, 0.3);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: rgba(10, 20, 40, 0.5);
+      border: 1px solid rgba(120, 180, 255, 0.15);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .videos-section {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .videos-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+      padding-right: 8px;
+      max-height: calc(100vh - 400px);
+    }
+
+    .videos-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .videos-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .videos-list::-webkit-scrollbar-thumb {
+      background: rgba(120, 180, 255, 0.3);
+      border-radius: 3px;
+    }
+
+    .video-item {
+      background: rgba(10, 20, 40, 0.5);
+      border: 1px solid rgba(120, 180, 255, 0.15);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+
+    .video-item:hover {
+      border-color: rgba(120, 180, 255, 0.3);
+      background: rgba(10, 20, 40, 0.7);
+    }
+
+    .video-info h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .video-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Settings Tab */
+    .settings-tab {
+      display: none;
+    }
+
+    .settings-tab.active {
+      display: block;
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .settings-card {
+      background: 
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(120, 180, 255, 0.08), transparent 50%),
+        linear-gradient(135deg, rgba(20, 40, 70, 0.7) 0%, rgba(15, 30, 55, 0.6) 100%);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(120, 180, 255, 0.2);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .settings-card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+
+    .btn-save {
+      padding: 12px 24px;
+      background: var(--accent);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-save:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(77, 166, 255, 0.3);
+    }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 24px;
+    }
+
+    .modal-overlay.show { display: flex; }
+
+    .modal {
+      background: 
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(120, 180, 255, 0.1), transparent 50%),
+        linear-gradient(135deg, rgba(20, 40, 70, 0.95) 0%, rgba(15, 30, 55, 0.9) 100%);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(120, 180, 255, 0.25);
+      border-radius: 24px;
+      padding: 32px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .close-btn {
+      width: 36px;
+      height: 36px;
+      background: rgba(10, 20, 40, 0.5);
+      border: 1px solid rgba(120, 180, 255, 0.15);
+      border-radius: 10px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .close-btn:hover {
+      background: rgba(10, 20, 40, 0.7);
+      border-color: rgba(120, 180, 255, 0.25);
+      color: var(--text-primary);
+    }
+
+    .upload-zone {
+      border: 2px dashed rgba(120, 180, 255, 0.3);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: rgba(10, 20, 40, 0.4);
+    }
+
+    .upload-zone:hover {
+      border-color: var(--accent);
+      background: rgba(10, 20, 40, 0.6);
+    }
+
+    .upload-zone.dragover {
+      border-color: var(--accent);
+      background: rgba(77, 166, 255, 0.1);
+    }
+
+    .upload-icon {
+      font-size: 48px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .upload-text {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .upload-hint {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: rgba(10, 20, 40, 0.5);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 16px;
+      display: none;
+    }
+
+    .progress-bar.show { display: block; }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 1200px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        max-height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Screen -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <h1 class="login-title">Administration</h1>
+      <p class="login-subtitle">Glace Intérieure</p>
+      <div id="loginError" class="error-msg"></div>
+        <div class="form-group">
+        <label class="form-label">Mot de passe</label>
+        <input type="password" id="passwordInput" class="form-input" placeholder="Entrez le mot de passe" onkeypress="if(event.key==='Enter')authenticate()">
+      </div>
+      <button class="btn-primary" onclick="authenticate()">Connexion</button>
+    </div>
+        </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" class="dashboard">
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="brand">
+          <div class="brand-icon">
+            <span class="material-icons">admin_panel_settings</span>
+          </div>
+          <div class="brand-text">Administration</div>
+        </div>
+        <nav class="nav-tabs">
+          <button class="nav-tab active" onclick="switchTab('content', this)">
+            <span class="material-icons" style="font-size:18px">dashboard</span>
+            Contenu
+        </button>
+          <button class="nav-tab" onclick="switchTab('settings', this)">
+            <span class="material-icons" style="font-size:18px">settings</span>
+            Paramètres
+          </button>
+        </nav>
+      </div>
+      <button class="logout-btn" onclick="logout()">
+        <span class="material-icons" style="font-size:18px">logout</span>
+        Déconnexion
+      </button>
+    </header>
+
+    <main class="workspace">
+      <!-- Content Tab -->
+      <div id="contentTab" class="tab-content">
+        <aside class="sidebar">
+          <div class="sidebar-header">
+            <h2 class="sidebar-title">Modules</h2>
+            <button class="add-module-btn" onclick="openModuleModal()" title="Ajouter un module">
+              <span class="material-icons" style="font-size:20px">add</span>
+            </button>
+      </div>
+          <div class="modules-list" id="modulesList">
+            <!-- Modules loaded dynamically -->
+          </div>
+        </aside>
+
+        <div class="main-content">
+          <div class="content-header">
+            <h2 class="content-title" id="selectedModuleTitle">Sélectionnez un module</h2>
+            <button class="add-video-btn" onclick="openVideoModal()" id="addVideoBtn" style="display:none">
+              <span class="material-icons" style="font-size:18px">add</span>
+              Ajouter une vidéo
+          </button>
+        </div>
+
+          <div class="stats-grid" id="statsGrid" style="display:none">
+          <div class="stat-card">
+              <div class="stat-value" id="totalVideos">0</div>
+              <div class="stat-label">Vidéos totales</div>
+          </div>
+          <div class="stat-card">
+              <div class="stat-value" id="moduleVideosCount">0</div>
+              <div class="stat-label">Vidéos dans ce module</div>
+          </div>
+          <div class="stat-card">
+              <div class="stat-value" id="activeModulesCount">0</div>
+              <div class="stat-label">Modules actifs</div>
+          </div>
+        </div>
+
+          <div class="videos-section" id="videosSection" style="display:none">
+            <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; color: var(--text-primary);">Vidéos</h3>
+            <div class="videos-list" id="videosList">
+              <!-- Videos loaded dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Tab -->
+      <div id="settingsTab" class="tab-content settings-tab">
+        <div class="settings-card">
+          <h2 class="settings-card-title">Paramètres du site</h2>
+          <div class="settings-grid">
+            <div class="form-group">
+              <label class="form-label">Nom du site</label>
+              <input type="text" id="siteName" class="form-input" placeholder="Glace Intérieure">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tagline</label>
+              <input type="text" id="siteTagline" class="form-input" placeholder="Plateforme de partage">
+            </div>
+          </div>
+          <div class="form-group" style="margin-top: 20px;">
+            <label class="form-label">Contenu de la page À propos</label>
+            <textarea id="aboutEditor" class="form-input" style="min-height: 200px; resize: vertical;" placeholder="Contenu de la page À propos..."></textarea>
+          </div>
+          <button class="btn-save" onclick="saveSettings()" style="margin-top: 20px;">Enregistrer les paramètres</button>
+        </div>
+      </div>
+    </main>
+            </div>
+
+  <!-- Module Modal -->
+  <div id="moduleModal" class="modal-overlay" onclick="if(event.target===this)closeModuleModal()">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="moduleModalTitle">Ajouter un module</h2>
+        <button class="close-btn" onclick="closeModuleModal()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <form id="moduleForm" onsubmit="saveModule(event)">
+            <div class="form-group">
+          <label class="form-label">Nom du module *</label>
+          <input type="text" id="moduleName" class="form-input" required maxlength="100">
+            </div>
+            <div class="form-group">
+          <label class="form-label">Clé (identifiant unique) *</label>
+          <input type="text" id="moduleKey" class="form-input" required pattern="[a-z0-9-]+" placeholder="ex: technique-patinage">
+              </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea id="moduleDescription" class="form-input" rows="3" maxlength="500"></textarea>
+            </div>
+        <button type="submit" class="btn-primary">Enregistrer</button>
+      </form>
+              </div>
+            </div>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="modal-overlay" onclick="if(event.target===this)closeVideoModal()">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="videoModalTitle">Ajouter une vidéo</h2>
+        <button class="close-btn" onclick="closeVideoModal()">
+          <span class="material-icons">close</span>
+            </button>
+        </div>
+      <form id="videoForm" onsubmit="saveVideo(event)">
+        <div class="form-group">
+          <label class="form-label">Titre *</label>
+          <input type="text" id="videoTitle" class="form-input" required maxlength="200">
+          </div>
+        <div class="form-group">
+          <label class="form-label">Module *</label>
+          <select id="videoModule" class="form-input" required></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea id="videoDescription" class="form-input" rows="3" maxlength="1000"></textarea>
+      </div>
+        <div class="form-group">
+          <label class="form-label">Fichier vidéo *</label>
+          <div class="upload-zone" id="uploadZone" onclick="document.getElementById('videoFile').click()">
+            <div class="upload-icon">
+              <span class="material-icons">cloud_upload</span>
+            </div>
+            <div class="upload-text">Cliquez ou glissez une vidéo ici</div>
+            <div class="upload-hint">Formats supportés: MP4, WebM, MOV</div>
+            <input type="file" id="videoFile" accept="video/*" style="display:none" onchange="handleFileSelect(event)">
+          </div>
+          <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary" id="videoSubmitBtn">Téléverser</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_PASSWORD = 'admin123';
+    let modules = [];
+    let videos = [];
+    let selectedFile = null;
+    let aboutDraft = '';
+    let selectedModuleKey = null;
+    let editingModuleId = null;
+
+    function authenticate() {
+      const password = document.getElementById('passwordInput').value;
+      const error = document.getElementById('loginError');
+
+      if (password === ADMIN_PASSWORD) {
+        localStorage.setItem('gi_admin', btoa(ADMIN_PASSWORD));
+        showDashboard();
+      } else {
+        error.textContent = 'Mot de passe incorrect';
+        error.classList.add('show');
+      }
+    }
+
+    function checkAuth() {
+      if (localStorage.getItem('gi_admin') === btoa(ADMIN_PASSWORD)) {
+        showDashboard();
+      }
+    }
+
+    function showDashboard() {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboard').classList.add('show');
+      loadAll();
+    }
+
+    function logout() {
+      localStorage.removeItem('gi_admin');
+      location.reload();
+    }
+
+    function switchTab(tab, btnEl) {
+      document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      
+      document.getElementById('contentTab').style.display = tab === 'content' ? 'grid' : 'none';
+      document.getElementById('settingsTab').classList.toggle('active', tab === 'settings');
+    }
+
+    async function loadAll() {
+      await Promise.all([loadModules(), loadVideos(), loadAbout(), loadSettings()]);
+    }
+
+    async function loadModules() {
+      try {
+        const res = await fetch('/api/modules/all');
+        modules = await res.json();
+        if (!selectedModuleKey && modules.length > 0) {
+          const firstActive = modules.find(m => m.isActive) || modules[0];
+          selectedModuleKey = firstActive ? firstActive.key : null;
+        }
+        renderModules();
+        updateModuleSelect();
+        renderSelectedModule();
+      } catch (e) { console.error(e); }
+    }
+
+    async function loadVideos() {
+      try {
+        const res = await fetch('/api/videos');
+        videos = await res.json();
+        renderModules();
+        renderSelectedModule();
+      } catch (e) { console.error(e); }
+    }
+
+    async function loadAbout() {
+      try {
+        const res = await fetch('/api/about');
+        const data = await res.json();
+        aboutDraft = data.content || '';
+        document.getElementById('aboutEditor').value = aboutDraft;
+      } catch (e) { console.error(e); }
+    }
+
+    async function loadSettings() {
+      try {
+        const res = await fetch('/api/settings');
+        const data = await res.json();
+        document.getElementById('siteName').value = data.siteName || '';
+        document.getElementById('siteTagline').value = data.tagline || '';
+      } catch (e) { console.error(e); }
+    }
+
+    function renderModules() {
+      const list = document.getElementById('modulesList');
+      if (!list) return;
+
+      if (modules.length === 0) {
+        list.innerHTML = '<div class="empty-state">Aucun module</div>';
+        return;
+      }
+
+      list.innerHTML = modules.map(m => {
+        const count = videos.filter(v => v.moduleKey === m.key).length;
+        const isActive = selectedModuleKey === m.key;
+        
+        return `
+          <div class="module-item ${isActive ? 'active' : ''}" onclick="selectModule('${m.key}')">
+            <div class="module-item-header">
+              <div class="module-item-name">${m.name}</div>
+              <div class="module-item-actions" onclick="event.stopPropagation()">
+                <button class="icon-btn" onclick="editModule('${m._id}')" title="Éditer">
+                  <span class="material-icons" style="font-size:18px">edit</span>
+                </button>
+                <button class="icon-btn" onclick="toggleModule('${m._id}', ${!m.isActive})" title="${m.isActive ? 'Désactiver' : 'Activer'}">
+                  <span class="material-icons" style="font-size:18px">${m.isActive ? 'visibility' : 'visibility_off'}</span>
+                </button>
+                <button class="icon-btn delete" onclick="deleteModule('${m._id}')" title="Supprimer">
+                  <span class="material-icons" style="font-size:18px">delete</span>
+                </button>
+              </div>
+            </div>
+            <div class="module-item-meta">
+              <span class="module-badge">${count} vidéo${count !== 1 ? 's' : ''}</span>
+              <span class="status-badge ${m.isActive ? 'active' : 'inactive'}">${m.isActive ? 'ACTIF' : 'INACTIF'}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function selectModule(key) {
+      selectedModuleKey = key;
+      renderModules();
+      renderSelectedModule();
+      updateModuleSelect();
+    }
+
+    function renderSelectedModule() {
+      const m = modules.find(x => x.key === selectedModuleKey);
+      
+      if (!m) {
+        document.getElementById('selectedModuleTitle').textContent = 'Sélectionnez un module';
+        document.getElementById('addVideoBtn').style.display = 'none';
+        document.getElementById('statsGrid').style.display = 'none';
+        document.getElementById('videosSection').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('selectedModuleTitle').textContent = m.name;
+      document.getElementById('addVideoBtn').style.display = 'flex';
+      document.getElementById('statsGrid').style.display = 'grid';
+      document.getElementById('videosSection').style.display = 'flex';
+
+      const moduleVideos = videos.filter(v => v.moduleKey === m.key);
+      const activeModules = modules.filter(m => m.isActive).length;
+
+      document.getElementById('totalVideos').textContent = videos.length;
+      document.getElementById('moduleVideosCount').textContent = moduleVideos.length;
+      document.getElementById('activeModulesCount').textContent = activeModules;
+
+      const videosList = document.getElementById('videosList');
+      if (moduleVideos.length === 0) {
+        videosList.innerHTML = '<div class="empty-state">Aucune vidéo dans ce module</div>';
+        return;
+      }
+
+      videosList.innerHTML = moduleVideos.map(v => `
+          <div class="video-item">
+            <div class="video-info">
+            <h4>${v.title}</h4>
+            <p>${new Date(v.uploadedAt).toLocaleDateString('fr-FR')} • ${v.moduleKey}</p>
+            </div>
+          <button class="icon-btn delete" onclick="deleteVideo('${v._id}')" title="Supprimer">
+            <span class="material-icons" style="font-size:18px">delete</span>
+            </button>
+          </div>
+      `).join('');
+    }
+
+    function updateModuleSelect() {
+      const select = document.getElementById('videoModule');
+      if (!select) return;
+      select.innerHTML = modules.filter(m => m.isActive).map(m => 
+        `<option value="${m.key}" ${m.key === selectedModuleKey ? 'selected' : ''}>${m.name}</option>`
+      ).join('');
+    }
+
+    function openModuleModal() {
+      editingModuleId = null;
+      document.getElementById('moduleModalTitle').textContent = 'Ajouter un module';
+      document.getElementById('moduleForm').reset();
+      document.getElementById('moduleModal').classList.add('show');
+    }
+
+    function closeModuleModal() {
+      document.getElementById('moduleModal').classList.remove('show');
+      editingModuleId = null;
+    }
+
+    function editModule(id) {
+      const m = modules.find(x => x._id === id);
+      if (!m) return;
+      editingModuleId = id;
+      document.getElementById('moduleModalTitle').textContent = 'Modifier le module';
+      document.getElementById('moduleName').value = m.name;
+      document.getElementById('moduleKey').value = m.key;
+      document.getElementById('moduleKey').disabled = true;
+      document.getElementById('moduleDescription').value = m.description || '';
+      document.getElementById('moduleModal').classList.add('show');
+    }
+
+    async function saveModule(e) {
+      e.preventDefault();
+      const name = document.getElementById('moduleName').value.trim();
+      const key = document.getElementById('moduleKey').value.trim();
+      const description = document.getElementById('moduleDescription').value.trim();
+
+      try {
+        const url = editingModuleId ? `/api/modules/${editingModuleId}` : '/api/modules';
+        const method = editingModuleId ? 'PUT' : 'POST';
+        
+        const res = await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, key, description })
+        });
+
+        if (res.ok) {
+          closeModuleModal();
+          await loadModules();
+        } else {
+          const data = await res.json();
+          alert(data.error || 'Erreur');
+        }
+      } catch (e) {
+        console.error(e);
+        alert('Erreur lors de la sauvegarde');
+      }
+    }
+
+    async function toggleModule(id, isActive) {
+      try {
+        const res = await fetch(`/api/modules/${id}/toggle`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ isActive })
+        });
+        if (res.ok) await loadModules();
+      } catch (e) { console.error(e); }
+    }
+
+    async function deleteModule(id) {
+      if (!confirm('Supprimer ce module ?')) return;
+      try {
+        const res = await fetch(`/api/modules/${id}`, { method: 'DELETE' });
+        if (res.ok) {
+          if (modules.find(m => m._id === id)?.key === selectedModuleKey) {
+            selectedModuleKey = null;
+          }
+          await loadModules();
+        }
+      } catch (e) { console.error(e); }
+    }
+
+    function openVideoModal() {
+      selectedFile = null;
+      document.getElementById('videoModalTitle').textContent = 'Ajouter une vidéo';
+      document.getElementById('videoForm').reset();
+      document.getElementById('uploadZone').style.display = 'block';
+      document.getElementById('progressBar').classList.remove('show');
+      updateModuleSelect();
+      document.getElementById('videoModal').classList.add('show');
+    }
+
+    function closeVideoModal() {
+      document.getElementById('videoModal').classList.remove('show');
+      selectedFile = null;
+    }
+
+    function handleFileSelect(e) {
+      selectedFile = e.target.files[0];
+      if (selectedFile) {
+        document.getElementById('uploadZone').querySelector('.upload-text').textContent = selectedFile.name;
+      }
+    }
+
+    async function saveVideo(e) {
+      e.preventDefault();
+      if (!selectedFile) {
+        alert('Veuillez sélectionner une vidéo');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('video', selectedFile);
+      formData.append('title', document.getElementById('videoTitle').value);
+      formData.append('moduleKey', document.getElementById('videoModule').value);
+      formData.append('description', document.getElementById('videoDescription').value);
+
+      const submitBtn = document.getElementById('videoSubmitBtn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Téléversement...';
+
+      const progressBar = document.getElementById('progressBar');
+      const progressFill = document.getElementById('progressFill');
+      progressBar.classList.add('show');
+      progressFill.style.width = '0%';
+
+      try {
+        const xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener('progress', (e) => {
+          if (e.lengthComputable) {
+            const percent = (e.loaded / e.total) * 100;
+            progressFill.style.width = percent + '%';
+          }
+        });
+
+        xhr.onload = async () => {
+          if (xhr.status === 200) {
+            progressFill.style.width = '100%';
+            setTimeout(() => {
+              closeVideoModal();
+            loadVideos();
+            }, 500);
+          } else {
+            const data = JSON.parse(xhr.responseText);
+            alert(data.error || 'Erreur lors du téléversement');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Téléverser';
+          }
+        };
+
+        xhr.open('POST', '/api/videos');
+        xhr.send(formData);
+      } catch (e) {
+        console.error(e);
+        alert('Erreur lors du téléversement');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Téléverser';
+      }
+    }
+
+    async function deleteVideo(id) {
+      if (!confirm('Supprimer cette vidéo ?')) return;
+      try {
+        const res = await fetch(`/api/videos/${id}`, { method: 'DELETE' });
+        if (res.ok) await loadVideos();
+      } catch (e) { console.error(e); }
+    }
+
+    async function saveSettings() {
+      const siteName = document.getElementById('siteName').value;
+      const tagline = document.getElementById('siteTagline').value;
+      const aboutContent = document.getElementById('aboutEditor').value;
+
+      try {
+        await Promise.all([
+          fetch('/api/settings', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ siteName, tagline })
+          }),
+          fetch('/api/about', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: aboutContent })
+          })
+        ]);
+        alert('Paramètres enregistrés !');
+      } catch (e) {
+        console.error(e);
+        alert('Erreur lors de l\'enregistrement');
+      }
+    }
+
+    // Drag and drop
+    const uploadZone = document.getElementById('uploadZone');
+    if (uploadZone) {
+      uploadZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadZone.classList.add('dragover');
+      });
+      uploadZone.addEventListener('dragleave', () => {
+        uploadZone.classList.remove('dragover');
+      });
+      uploadZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('video/')) {
+          selectedFile = file;
+          const input = document.getElementById('videoFile');
+          const dataTransfer = new DataTransfer();
+          dataTransfer.items.add(file);
+          input.files = dataTransfer.files;
+          uploadZone.querySelector('.upload-text').textContent = file.name;
+        }
+      });
+    }
+
+    checkAuth();
+  </script>
+</body>
+</html>

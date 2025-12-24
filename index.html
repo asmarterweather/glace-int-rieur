@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Glace Intérieure — Bien-être, glisse, confiance, équilibre</title>
+  <style>
+    :root {
+      --bg:#0e1013; --fg:#f5f7fb; --muted:#a9b1bd; --primary:#76e4f7; --accent:#dba7ff; --card:#171a20; --line:#232834;
+    }
+    * { box-sizing: border-box }
+    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial; color: var(--fg); background: linear-gradient(180deg,#0b0d11,#10141b); }
+    a { color: var(--primary); text-decoration: none }
+    header { position: sticky; top:0; background: rgba(16,20,27,.7); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); z-index:50 }
+    .nav { max-width:1100px; margin:0 auto; display:flex; gap:16px; align-items:center; padding:12px 16px }
+    .nav .brand { font-weight: 700; letter-spacing: .3px }
+    .nav .links { display:flex; flex-wrap:wrap; gap:12px; margin-left:auto }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border:1px solid var(--line); border-radius:10px; background:#11151c; color:var(--fg) }
+    .btn.primary { background: linear-gradient(135deg,var(--primary),#60c0ff); color:#001018; border:0 }
+    main { max-width:1100px; margin:0 auto; padding:24px 16px 64px }
+    .hero { display:grid; grid-template-columns: 1.2fr .8fr; gap:20px; align-items:center; margin:24px 0 32px }
+    .hero .panel { background: radial-gradient(1200px 600px at 20% 10%, rgba(118,228,247,.15), transparent), #0d1117; border:1px solid var(--line); border-radius:16px; overflow:hidden }
+    .hero .vis { position: relative; aspect-ratio: 16/9; display:block }
+    .hero .vis video, .hero .vis img { width:100%; height:100%; object-fit:cover; display:block; filter: saturate(1.1) contrast(1.05) }
+    .hero .copy { padding:20px }
+    h1 { font-size:36px; margin:0 0 8px }
+    h2 { font-size:24px; margin:24px 0 12px }
+    p { color: var(--muted); line-height: 1.6 }
+    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:16px }
+    .card { background: linear-gradient(180deg,#0f1320,#0c1018); border:1px solid var(--line); border-radius:14px; padding:14px }
+    .card h3 { margin:6px 0 6px; font-size:18px }
+    .card p { margin:0 0 8px; font-size:14px }
+    .card .meta { font-size:12px; color:#90a0b5 }
+    .badge { font-size:12px; padding:4px 8px; border-radius:999px; background:#182233; border:1px solid #26324a; color:#bfe4ff }
+    .section-title { display:flex; align-items:center; justify-content:space-between; margin-top:28px; margin-bottom:8px }
+    .hidden { display:none !important }
+    hr { border:0; border-top:1px solid var(--line); margin:16px 0 }
+    input, textarea, select { width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--line); background:#0e131b; color:var(--fg) }
+    label { font-size:13px; color:#9fb0c7 }
+    .form-row { display:grid; grid-template-columns: 1fr 1fr; gap:12px }
+    .form { display:grid; gap:10px }
+    .item-actions { display:flex; gap:8px }
+    .small { font-size:12px; color:#8b9ab1 }
+    footer { max-width:1100px; margin:0 auto; padding:32px 16px; color:#7f8aa1 }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr } }
+    .comment { border-top:1px solid var(--line); padding:10px 0 }
+    .comment .author { font-weight:600; font-size:13px }
+    .comment .date { font-size:12px; color:#8ea0b9 }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <div class="brand">Glace Intérieure</div>
+      <div class="links">
+        <a href="#home">Accueil</a>
+        <a href="#corps">Corps & Glisse</a>
+        <a href="#esprit">Esprit & Confiance</a>
+        <a href="#force">Force & Mobilité</a>
+        <a href="#creativite">Expression & Créativité</a>
+        <a href="#programmes">Programmes</a>
+        <a href="#blog">Blog</a>
+        <a href="#admin" class="btn">Admin</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section id="view-home">
+      <div class="hero">
+        <div class="panel">
+          <div class="vis">
+            <video autoplay muted loop playsinline poster="" aria-label="Glisse douce">
+              <source src="https://cdn.coverr.co/videos/coverr-ice-skating-in-slow-motion-7652/1080p.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+        <div class="panel copy">
+          <h1>Retrouver l’équilibre sur la glace et en soi</h1>
+          <p>Ici, le patinage devient un chemin de bien-être.</p>
+          <div style="display:flex;gap:10px;margin-top:10px">
+            <a class="btn primary" href="#programmes">Découvre ton espace de glisse intérieure</a>
+            <a class="btn" href="#blog">Lire le journal de glisse</a>
+          </div>
+          <hr />
+          <div class="grid">
+            <div class="card"><span class="badge">1</span><h3>Corps & Glisse</h3><p>Technique douce et conscience corporelle.</p></div>
+            <div class="card"><span class="badge">2</span><h3>Esprit & Confiance</h3><p>Présence, confiance, plaisir du mouvement.</p></div>
+            <div class="card"><span class="badge">3</span><h3>Force & Mobilité</h3><p>Stabilité, puissance, prévention.</p></div>
+            <div class="card"><span class="badge">4</span><h3>Expression & Créativité</h3><p>Artistique, style, émotion.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="section-title"><h2>Nouveautés</h2></div>
+      <div id="home-latest" class="grid"></div>
+    </section>
+
+    <section id="view-section" class="hidden">
+      <div class="section-title">
+        <h2 id="section-title"></h2>
+        <div class="small" id="section-count"></div>
+      </div>
+      <div id="section-grid" class="grid"></div>
+    </section>
+
+    <section id="view-video" class="hidden">
+      <a href="#" onclick="history.back();return false">← Retour</a>
+      <h2 id="video-title"></h2>
+      <div id="video-player" class="panel" style="padding:0;overflow:hidden;border-radius:16px;border:1px solid var(--line)"></div>
+      <p id="video-desc"></p>
+      <div class="small" id="video-meta"></div>
+      <hr />
+      <h3>Commentaires</h3>
+      <div id="video-comments"></div>
+      <div id="video-comment-form" class="form">
+        <div class="form-row">
+          <div>
+            <label>Nom</label>
+            <input id="vc-name" placeholder="Ton prénom" />
+          </div>
+          <div>
+            <label>Optionnel: Email</label>
+            <input id="vc-email" placeholder="email@example.com" />
+          </div>
+        </div>
+        <div>
+          <label>Message</label>
+          <textarea id="vc-message" rows="3" placeholder="Ton ressenti, ta question..."></textarea>
+        </div>
+        <button class="btn primary" id="vc-submit">Publier</button>
+      </div>
+    </section>
+
+    <section id="view-blog" class="hidden">
+      <div class="section-title">
+        <h2>Blog / Journal de glisse</h2>
+        <a id="new-post-link" href="#admin" class="small hidden">+ Nouvel article</a>
+      </div>
+      <div id="blog-list" class="grid"></div>
+    </section>
+
+    <section id="view-post" class="hidden">
+      <a href="#" onclick="history.back();return false">← Retour</a>
+      <h2 id="post-title"></h2>
+      <div class="small" id="post-date"></div>
+      <div id="post-content"></div>
+      <hr />
+      <h3>Commentaires</h3>
+      <div id="post-comments"></div>
+      <div id="post-comment-form" class="form">
+        <div class="form-row">
+          <div>
+            <label>Nom</label>
+            <input id="pc-name" placeholder="Ton prénom" />
+          </div>
+          <div>
+            <label>Optionnel: Email</label>
+            <input id="pc-email" placeholder="email@example.com" />
+          </div>
+        </div>
+        <div>
+          <label>Message</label>
+          <textarea id="pc-message" rows="3"></textarea>
+        </div>
+        <button class="btn primary" id="pc-submit">Publier</button>
+      </div>
+    </section>
+
+    <section id="view-admin" class="hidden">
+      <h2>Admin</h2>
+      <div id="admin-login" class="form">
+        <p class="small">Admin protégé par code. Définis ton propre code après installation.</p>
+        <label>Code admin</label>
+        <input id="admin-pass" type="password" placeholder="••••••••" />
+        <div style="display:flex;gap:8px">
+          <button class="btn primary" id="admin-login-btn">Entrer</button>
+          <button class="btn" id="admin-logout-btn" style="display:none">Se déconnecter</button>
+        </div>
+        <p class="small" id="admin-login-state"></p>
+      </div>
+
+      <div id="admin-panel" class="hidden">
+        <div class="section-title"><h3>Ajouter une vidéo</h3></div>
+        <form id="form-video" class="form">
+          <div class="form-row">
+            <div><label>Titre</label><input name="title" required /></div>
+            <div><label>Section</label>
+              <select name="section" required>
+                <option value="corps">Corps & Glisse</option>
+                <option value="esprit">Esprit & Confiance</option>
+                <option value="force">Force & Mobilité</option>
+                <option value="creativite">Expression & Créativité</option>
+                <option value="programmes">Programmes</option>
+              </select>
+            </div>
+          </div>
+          <div><label>Description</label><textarea name="description" rows="3"></textarea></div>
+          <div><label>URL de la vidéo (YouTube/Vimeo/MP4 Backblaze)</label><input name="url" placeholder="https://youtu.be/... ou https://f000.backblazeb2.com/file/..." required /></div>
+          <div class="small">Astuce: pour YouTube, colle le lien de partage. Pour Backblaze, mets l’URL publique du fichier.</div>
+          <button class="btn primary">Publier</button>
+        </form>
+        <hr />
+        <div class="section-title"><h3>Rédiger un article</h3></div>
+        <form id="form-post" class="form">
+          <div><label>Titre</label><input name="title" required /></div>
+          <div><label>Contenu (texte simple)</label><textarea name="content" rows="6" required></textarea></div>
+          <button class="btn primary">Publier</button>
+        </form>
+        <hr />
+        <div class="section-title"><h3>Modération rapide</h3></div>
+        <div id="admin-moderation"></div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    © <span id="year"></span> Glace Intérieure — Un espace de glisse et de bien-être.
+  </footer>
+
+  <script type="module">
+    // Firebase SDK (v11)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, doc, getDoc, deleteDoc, query, where, orderBy, serverTimestamp, onSnapshot, limit } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    // 1) PASTE YOUR FIREBASE CONFIG HERE
+    const firebaseConfig = {
+      apiKey: "PASTE_HERE",
+      authDomain: "PASTE_HERE.firebaseapp.com",
+      projectId: "PASTE_HERE",
+      storageBucket: "PASTE_HERE.appspot.com",
+      messagingSenderId: "PASTE_HERE",
+      appId: "PASTE_HERE"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // 2) Admin passcode (SHA-256 hex of your chosen code). Default is hash of "admin123". Replace ADMIN_HASH when you change code.
+    const ADMIN_HASH = "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3"; // sha256("admin123")
+    async function sha256Hex(str) {
+      const buf = new TextEncoder().encode(str);
+      const hash = await crypto.subtle.digest("SHA-256", buf);
+      return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,"0")).join("");
+    }
+
+    // Router
+    const views = {
+      home: document.getElementById("view-home"),
+      section: document.getElementById("view-section"),
+      video: document.getElementById("view-video"),
+      blog: document.getElementById("view-blog"),
+      post: document.getElementById("view-post"),
+      admin: document.getElementById("view-admin"),
+    };
+    const state = { admin:false };
+
+    function show(view) {
+      Object.values(views).forEach(v => v.classList.add("hidden"));
+      view.classList.remove("hidden");
+    }
+
+    function parseHash() {
+      const h = location.hash.replace(/^#/, "") || "home";
+      if (h === "home") { show(views.home); }
+      else if (["corps","esprit","force","creativite","programmes"].includes(h)) { renderSection(h); }
+      else if (h.startsWith("video/")) { const id = h.split("/")[1]; renderVideo(id); }
+      else if (h === "blog") { renderBlog(); }
+      else if (h.startsWith("post/")) { const id = h.split("/")[1]; renderPost(id); }
+      else if (h === "admin") { renderAdmin(); }
+      else { location.hash = "#home"; }
+    }
+    window.addEventListener("hashchange", parseHash);
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Utilities
+    function sectionLabel(key) {
+      return {
+        corps:"Corps & Glisse",
+        esprit:"Esprit & Confiance",
+        force:"Force & Mobilité",
+        creativite:"Expression & Créativité",
+        programmes:"Programmes",
+      }[key] || key;
+    }
+
+    function formatDate(ts) {
+      if (!ts) return "";
+      const d = ts.toDate ? ts.toDate() : new Date(ts);
+      return d.toLocaleDateString("fr-FR", { day:"2-digit", month:"short", year:"numeric" });
+    }
+
+    function renderCard(item, type="video") {
+      const el = document.createElement("div");
+      el.className = "card";
+      el.innerHTML = `
+        <div class="meta">${formatDate(item.createdAt)} · <span class="badge">${type === "video" ? sectionLabel(item.section) : "Article"}</span></div>
+        <h3>${escapeHtml(item.title)}</h3>
+        <p>${escapeHtml((item.description || item.content || "").slice(0,140))}${(item.description||item.content||"").length>140?"...":""}</p>
+        <div class="item-actions">
+          <a class="btn" href="#${type === "video" ? "video" : "post"}/${item.id}">Ouvrir</a>
+          ${state.admin ? `<button class="btn" data-del="${type}:${item.id}">Supprimer</button>` : ""}
+        </div>
+      `;
+      el.addEventListener("click", (e) => {
+        const del = e.target.closest("[data-del]");
+        if (del) {
+          const [t,id] = del.dataset.del.split(":");
+          if (confirm("Supprimer cet élément ?")) {
+            if (t==="video") deleteDoc(doc(db,"videos",id));
+            else deleteDoc(doc(db,"posts",id));
+          }
+          e.preventDefault(); e.stopPropagation();
+        }
+      });
+      return el;
+    }
+
+    function escapeHtml(s){return s? s.replace(/[&<>"']/g,m=>({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;" }[m])) : ""}
+
+    // Home latest
+    function renderHomeLatest() {
+      const container = document.getElementById("home-latest");
+      const qref = query(collection(db,"videos"), orderBy("createdAt","desc"), limit(6));
+      onSnapshot(qref, snap => {
+        container.innerHTML = "";
+        snap.forEach(docu => {
+          const data = { id: docu.id, ...docu.data() };
+          container.appendChild(renderCard(data, "video"));
+        });
+      });
+    }
+
+    // Section
+    function renderSection(key) {
+      show(views.section);
+      document.getElementById("section-title").textContent = sectionLabel(key);
+      const grid = document.getElementById("section-grid");
+      const countEl = document.getElementById("section-count");
+      const qref = query(collection(db,"videos"), where("section","==",key), orderBy("createdAt","desc"));
+      const unsub = onSnapshot(qref, snap => {
+        grid.innerHTML = "";
+        countEl.textContent = `${snap.size} élément(s)`;
+        snap.forEach(docu => {
+          const data = { id: docu.id, ...docu.data() };
+          grid.appendChild(renderCard(data, "video"));
+        });
+      });
+    }
+
+    // Video detail
+    async function renderVideo(id) {
+      show(views.video);
+      const ref = doc(db,"videos",id);
+      const docu = await getDoc(ref);
+      if (!docu.exists()) { document.getElementById("video-title").textContent="Vidéo introuvable"; return; }
+      const v = { id, ...docu.data() };
+      document.getElementById("video-title").textContent = v.title;
+      document.getElementById("video-desc").textContent = v.description || "";
+      document.getElementById("video-meta").textContent = `${sectionLabel(v.section)} · ${formatDate(v.createdAt)}`;
+      const player = document.getElementById("video-player");
+      player.innerHTML = renderEmbed(v.url);
+
+      // comments
+      setupComments("video", id, "video-comments", "vc-name","vc-email","vc-message","vc-submit");
+    }
+
+    // Blog list
+    function renderBlog() {
+      show(views.blog);
+      document.getElementById("new-post-link").classList.toggle("hidden", !state.admin);
+      const list = document.getElementById("blog-list");
+      const qref = query(collection(db,"posts"), orderBy("createdAt","desc"));
+      onSnapshot(qref, snap => {
+        list.innerHTML = "";
+        snap.forEach(docu => {
+          const data = { id: docu.id, ...docu.data() };
+          list.appendChild(renderCard(data, "post"));
+        });
+      });
+    }
+
+    // Post detail
+    async function renderPost(id) {
+      show(views.post);
+      const ref = doc(db,"posts",id);
+      const docu = await getDoc(ref);
+      if (!docu.exists()) { document.getElementById("post-title").textContent="Article introuvable"; return; }
+      const p = { id, ...docu.data() };
+      document.getElementById("post-title").textContent = p.title;
+      document.getElementById("post-date").textContent = formatDate(p.createdAt);
+      document.getElementById("post-content").innerHTML = textToHtml(p.content || "");
+
+      setupComments("post", id, "post-comments", "pc-name","pc-email","pc-message","pc-submit");
+    }
+
+    // Simple text -> HTML
+    function textToHtml(t) {
+      const safe = escapeHtml(t);
+      return safe.split(/\n{2,}/).map(par => `<p>${par.replace(/\n/g,"<br>")}</p>`).join("");
+    }
+
+    // URL -> embed HTML
+    function renderEmbed(url) {
+      if (!url) return "<div style='padding:16px'>Aucune URL fournie.</div>";
+      const u = new URL(url, location.href);
+      const href = u.href;
+
+      // YouTube
+      const ytMatch = href.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+      if (ytMatch) {
+        const id = ytMatch[1];
+        return `<iframe width="100%" height="420" src="https://www.youtube.com/embed/${id}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+      }
+      // Vimeo
+      const vimeoMatch = href.match(/vimeo\.com\/(\d+)/);
+      if (vimeoMatch) {
+        const id = vimeoMatch[1];
+        return `<iframe src="https://player.vimeo.com/video/${id}" width="100%" height="420" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+      }
+      // Direct MP4
+      if (href.endsWith(".mp4") || href.includes(".mp4?")) {
+        return `<video controls style="width:100%;height:auto"><source src="${href}" type="video/mp4">Votre navigateur ne supporte pas la vidéo.</video>`;
+      }
+      // Fallback: link
+      return `<div style="padding:16px"><a class="btn" href="${href}" target="_blank" rel="noopener">Ouvrir le lien</a></div>`;
+    }
+
+    // Comments setup
+    function setupComments(parentType, parentId, listId, nameId, emailId, msgId, submitId) {
+      const list = document.getElementById(listId);
+      const name = document.getElementById(nameId);
+      const email = document.getElementById(emailId);
+      const msg = document.getElementById(msgId);
+      const btn = document.getElementById(submitId);
+
+      const qref = query(collection(db,"comments"), where("parentType","==",parentType), where("parentId","==",parentId), orderBy("createdAt","asc"));
+      const unsub = onSnapshot(qref, snap => {
+        list.innerHTML = "";
+        if (snap.empty) list.innerHTML = `<p class="small">Pas encore de commentaires. Sois le premier !</p>`;
+        snap.forEach(d => {
+          const c = d.data();
+          const item = document.createElement("div");
+          item.className = "comment";
+          item.innerHTML = `
+            <div class="author">${escapeHtml(c.authorName || "Anonyme")} <span class="date">· ${formatDate(c.createdAt)}</span></div>
+            <div>${textToHtml(c.message || "")}</div>
+            ${state.admin ? `<div style="margin-top:6px"><button data-delc="${d.id}" class="btn">Supprimer</button></div>` : ""}
+          `;
+          item.addEventListener("click", (e) => {
+            const b = e.target.closest("[data-delc]");
+            if (b) {
+              if (confirm("Supprimer ce commentaire ?")) deleteDoc(doc(db,"comments",b.dataset.delc));
+              e.preventDefault(); e.stopPropagation();
+            }
+          });
+          list.appendChild(item);
+        });
+      });
+
+      btn.onclick = async () => {
+        const content = (msg.value || "").trim();
+        if (content.length < 3) { alert("Message trop court."); return; }
+        const author = (name.value || "Anonyme").trim();
+        const emailVal = (email.value || "").trim();
+        btn.disabled = true;
+        try {
+          await addDoc(collection(db,"comments"), {
+            parentType, parentId,
+            authorName: author,
+            authorEmail: emailVal,
+            message: content,
+            createdAt: serverTimestamp()
+          });
+          msg.value = "";
+        } catch(e) {
+          console.error(e);
+          alert("Erreur lors de l��envoi.");
+        } finally {
+          btn.disabled = false;
+        }
+      };
+    }
+
+    // Admin
+    const adminLoginBtn = document.getElementById("admin-login-btn");
+    const adminLogoutBtn = document.getElementById("admin-logout-btn");
+    const adminLoginBox = document.getElementById("admin-login");
+    const adminPanel = document.getElementById("admin-panel");
+    const adminState = document.getElementById("admin-login-state");
+
+    function refreshAdminUI() {
+      state.admin = localStorage.getItem("gi_admin") === "1";
+      adminPanel.classList.toggle("hidden", !state.admin);
+      adminLogoutBtn.style.display = state.admin ? "" : "none";
+      adminState.textContent = state.admin ? "Connecté." : "Hors ligne.";
+    }
+    refreshAdminUI();
+
+    adminLoginBtn.onclick = async () => {
+      const pass = (document.getElementById("admin-pass").value || "");
+      const hash = await sha256Hex(pass);
+      if (hash === ADMIN_HASH) {
+        localStorage.setItem("gi_admin", "1");
+        refreshAdminUI();
+        alert("Connecté.");
+      } else {
+        alert("Code incorrect.");
+      }
+    };
+
+    adminLogoutBtn.onclick = () => {
+      localStorage.removeItem("gi_admin");
+      refreshAdminUI();
+    };
+
+    // Admin forms
+    document.getElementById("form-video").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!state.admin) return alert("Admin requis.");
+      const fd = new FormData(e.target);
+      const payload = {
+        title: (fd.get("title")||"").toString().trim(),
+        description: (fd.get("description")||"").toString().trim(),
+        url: (fd.get("url")||"").toString().trim(),
+        section: (fd.get("section")||"corps").toString(),
+        createdAt: serverTimestamp()
+      };
+      if (!payload.title || !payload.url) return alert("Titre et URL requis.");
+      try {
+        await addDoc(collection(db,"videos"), payload);
+        e.target.reset();
+        alert("Vidéo publiée.");
+      } catch(err) {
+        console.error(err); alert("Erreur de publication.");
+      }
+    });
+
+    document.getElementById("form-post").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!state.admin) return alert("Admin requis.");
+      const fd = new FormData(e.target);
+      const payload = {
+        title: (fd.get("title")||"").toString().trim(),
+        content: (fd.get("content")||"").toString().trim(),
+        createdAt: serverTimestamp()
+      };
+      if (!payload.title || !payload.content) return alert("Champs requis.");
+      try {
+        await addDoc(collection(db,"posts"), payload);
+        e.target.reset();
+        alert("Article publié.");
+      } catch(err) {
+        console.error(err); alert("Erreur de publication.");
+      }
+    });
+
+    // Moderation quick view: last comments
+    function renderModeration() {
+      const box = document.getElementById("admin-moderation");
+      const qref = query(collection(db,"comments"), orderBy("createdAt","desc"), limit(10));
+      onSnapshot(qref, snap => {
+        box.innerHTML = "";
+        snap.forEach(d => {
+          const c = d.data();
+          const el = document.createElement("div");
+          el.className="card";
+          el.innerHTML = `
+            <div class="meta">${formatDate(c.createdAt)} · ${c.parentType} ${c.parentId.slice(0,6)}</div>
+            <div><strong>${escapeHtml(c.authorName||"")}</strong></div>
+            <div class="small">${escapeHtml((c.message||"").slice(0,200))}</div>
+            <div class="item-actions"><button class="btn" data-delc="${d.id}">Supprimer</button></div>
+          `;
+          el.addEventListener("click",(e)=>{
+            const b = e.target.closest("[data-delc]");
+            if (b) { if (confirm("Supprimer ?")) deleteDoc(doc(db,"comments",b.dataset.delc)); e.preventDefault(); e.stopPropagation(); }
+          });
+          box.appendChild(el);
+        });
+      });
+    }
+
+    function guardConfig() {
+      const missing = Object.values(firebaseConfig).some(v => (v||"").includes("PASTE_HERE"));
+      if (missing) {
+        const warn = document.createElement("div");
+        warn.className = "card";
+        warn.style.borderColor = "#ff6b6b";
+        warn.innerHTML = `<strong>Configuration Firebase requise</strong><p class="small">Ouvre le fichier et remplace firebaseConfig par celle de ton projet Firebase (Firestore activé). Ensuite recharge la page.</p>`;
+        document.querySelector("main").prepend(warn);
+      }
+    }
+
+    function renderAdmin(){
+      show(views.admin);
+    }
+
+    guardConfig();
+    renderHomeLatest();
+    renderModeration();
+    parseHash();
+  </script>
+</body>
+</html>
