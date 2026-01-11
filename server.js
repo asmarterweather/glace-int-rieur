@@ -396,6 +396,19 @@ async function initializeDefaultModules() {
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'client.html')));
 app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'admin.html')));
 
+// Admin authentication
+app.post('/api/admin/auth', (req, res) => {
+  const { password } = req.body;
+  const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+  
+  if (password === adminPassword) {
+    const adminToken = crypto.randomBytes(32).toString('hex');
+    res.json({ success: true, token: adminToken });
+  } else {
+    res.status(401).json({ error: 'Mot de passe incorrect' });
+  }
+});
+
 // AUTH ROUTES
 app.post('/api/auth/register', async (req, res) => {
   try {
