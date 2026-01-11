@@ -964,7 +964,6 @@
   </div>
 
   <script>
-    const ADMIN_PASSWORD = 'admin123';
     let modules = [];
     let videos = [];
     let selectedFile = null;
@@ -972,21 +971,33 @@
     let selectedModuleKey = null;
     let editingModuleId = null;
 
-    function authenticate() {
+    async function authenticate() {
       const password = document.getElementById('passwordInput').value;
       const error = document.getElementById('loginError');
-
-      if (password === ADMIN_PASSWORD) {
-        localStorage.setItem('gi_admin', btoa(ADMIN_PASSWORD));
-        showDashboard();
-      } else {
-        error.textContent = 'Mot de passe incorrect';
+      
+      try {
+        const res = await fetch('/api/admin/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password })
+        });
+        
+        if (res.ok) {
+          const data = await res.json();
+          localStorage.setItem('gi_admin_token', data.token);
+          showDashboard();
+        } else {
+          error.textContent = 'Mot de passe incorrect';
+          error.classList.add('show');
+        }
+      } catch (e) {
+        error.textContent = 'Erreur de connexion';
         error.classList.add('show');
       }
     }
 
     function checkAuth() {
-      if (localStorage.getItem('gi_admin') === btoa(ADMIN_PASSWORD)) {
+      if (localStorage.getItem('gi_admin_token')) {
         showDashboard();
       }
     }
@@ -998,7 +1009,7 @@
     }
 
     function logout() {
-      localStorage.removeItem('gi_admin');
+      localStorage.removeItem('gi_admin_token');
       location.reload();
     }
 
